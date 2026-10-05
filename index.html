@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToolsIA — Herramientas de Inteligencia Artificial Gratis en Español</title>
+  <meta name="description" content="Las mejores herramientas de IA gratis en español. Genera captions, emails, nombres de negocio, ideas para TikTok y resume textos con Inteligencia Artificial." />
+  <meta name="keywords" content="herramientas IA gratis, generador captions instagram, generador nombres negocio, ideas tiktok IA, resumir texto IA" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <!-- Google AdSense (reemplaza con tu ID cuando lo tengas) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #07060f;
+      --surface: rgba(255,255,255,0.04);
+      --surface-hover: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.08);
+      --border-glow: rgba(139,92,246,0.4);
+      --primary: #8b5cf6;
+      --primary-light: #a78bfa;
+      --accent: #06b6d4;
+      --accent2: #f59e0b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Animated background ── */
+    .bg-orbs {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.25;
+      animation: float 12s ease-in-out infinite;
+    }
+    .orb-1 { width: 500px; height: 500px; background: #7c3aed; top: -100px; left: -100px; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: #0891b2; top: 30%; right: -100px; animation-delay: -4s; }
+    .orb-3 { width: 350px; height: 350px; background: #7c3aed; bottom: -100px; left: 30%; animation-delay: -8s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    /* ── Layout ── */
+    .wrapper { position: relative; z-index: 1; }
+
+    /* ── Header ── */
+    header {
+      padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      background: rgba(7,6,15,0.6);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.3rem; font-weight: 800; letter-spacing: -0.5px;
+    }
+    .logo-icon {
+      width: 36px; height: 36px; background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px; display: grid; place-items: center; font-size: 18px;
+    }
+    .logo span { color: var(--primary-light); }
+    .badge-free {
+      background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);
+      color: var(--success); font-size: 0.72rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center; padding: 80px 24px 60px;
+      max-width: 700px; margin: 0 auto;
+    }
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3);
+      color: var(--primary-light); font-size: 0.8rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 20px; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900;
+      line-height: 1.15; letter-spacing: -1px; margin-bottom: 16px;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--primary-light), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; margin-bottom: 32px;
+    }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 1.6rem; font-weight: 800; color: var(--primary-light); }
+    .stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── API Key Banner ── */
+    .api-banner {
+      max-width: 700px; margin: 0 auto 40px;
+      padding: 20px 24px;
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25);
+      border-radius: var(--radius); display: flex; align-items: center; gap: 16px;
+      flex-wrap: wrap;
+    }
+    .api-banner.configured {
+      background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.25);
+    }
+    .api-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .api-info { flex: 1; min-width: 180px; }
+    .api-info strong { display: block; font-size: 0.9rem; color: var(--accent2); margin-bottom: 2px; }
+    .api-banner.configured .api-info strong { color: var(--success); }
+    .api-info small { color: var(--text-muted); font-size: 0.8rem; }
+    .api-input-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .api-input {
+      flex: 1; min-width: 200px; background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text);
+      padding: 8px 12px; font-size: 0.85rem; font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color .2s;
+    }
+    .api-input:focus { border-color: var(--primary); }
+    .api-input::placeholder { color: var(--text-muted); }
+    .btn-save-key {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border: none; border-radius: 8px; color: #fff;
+      padding: 8px 18px; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: opacity .2s, transform .1s;
+    }
+    .btn-save-key:hover { opacity: 0.9; transform: scale(1.02); }
+
+    /* ── Tools Grid ── */
+    .tools-section { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+    .section-label {
+      text-align: center; color: var(--text-muted); font-size: 0.8rem;
+      font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px;
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .tool-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      transition: transform .25s, border-color .25s, background .25s, box-shadow .25s;
+      cursor: pointer; position: relative; overflow: hidden;
+    }
+    .tool-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--card-color, var(--primary)), transparent 60%);
+      opacity: 0; transition: opacity .3s;
+    }
+    .tool-card:hover { transform: translateY(-4px); border-color: var(--border-glow); background: var(--surface-hover); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .tool-card:hover::before { opacity: 0.06; }
+    .tool-card-inner { position: relative; z-index: 1; }
+    .tool-emoji {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: grid; place-items: center; font-size: 24px; margin-bottom: 16px;
+    }
+    .tool-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+    .tool-card p { color: var(--text-muted); font-size: 0.87rem; line-height: 1.6; margin-bottom: 20px; }
+    .tool-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+      color: var(--text); background: rgba(255,255,255,0.06);
+      padding: 8px 16px; font-size: 0.84rem; font-weight: 600;
+      transition: background .2s, border-color .2s; cursor: pointer; text-decoration: none;
+    }
+    .tool-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+    .tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      padding: 2px 8px; border-radius: 20px; margin-bottom: 12px;
+    }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center; padding: 16px;
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: #0f0e1a; border: 1px solid var(--border);
+      border-radius: 20px; width: 100%; max-width: 680px;
+      max-height: 90vh; overflow-y: auto;
+      transform: scale(0.95) translateY(10px);
+      transition: transform .25s;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+    .modal-header {
+      padding: 24px 28px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .modal-title { display: flex; align-items: center; gap: 12px; }
+    .modal-title h2 { font-size: 1.15rem; font-weight: 700; }
+    .modal-close {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text-muted); cursor: pointer;
+      display: grid; place-items: center; font-size: 16px; flex-shrink: 0;
+      transition: background .2s, color .2s;
+    }
+    .modal-close:hover { background: var(--surface-hover); color: var(--text); }
+    .modal-body { padding: 24px 28px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; font-size: 0.85rem; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.3px;
+    }
+    .form-group textarea,
+    .form-group select,
+    .form-group input[type="text"] {
+      width: 100%; background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text); padding: 12px 14px; font-size: 0.9rem;
+      font-family: 'Inter', sans-serif; outline: none; resize: vertical;
+      transition: border-color .2s;
+    }
+    .form-group textarea:focus,
+    .form-group select:focus,
+    .form-group input[type="text"]:focus { border-color: var(--primary); }
+    .form-group select option { background: #1a1827; }
+    .options-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .opt-chip {
+      padding: 7px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;
+      border: 1px solid var(--border); background: var(--surface); cursor: pointer;
+      transition: all .2s; color: var(--text-muted);
+    }
+    .opt-chip.active, .opt-chip:hover {
+      border-color: var(--primary); color: var(--primary-light);
+      background: rgba(139,92,246,0.15);
+    }
+    .btn-generate {
+      width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff; font-size: 0.95rem; font-weight: 700;
+      letter-spacing: 0.3px; transition: opacity .2s, transform .1s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 8px;
+    }
+    .btn-generate:hover { opacity: 0.9; transform: scale(1.01); }
+    .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* ── Result ── */
+    .result-box {
+      margin-top: 20px; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+      display: none;
+    }
+    .result-box.visible { display: block; animation: fadeIn .3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .result-label {
+      font-size: 0.75rem; font-weight: 700; color: var(--primary-light);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+    }
+    .result-content {
+      color: var(--text); font-size: 0.92rem; line-height: 1.75;
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .result-actions { display: flex; gap: 8px; margin-top: 16px; }
+    .btn-copy, .btn-new {
+      flex: 1; padding: 9px; border-radius: 8px; font-size: 0.83rem;
+      font-weight: 600; cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn-copy { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); color: var(--primary-light); }
+    .btn-copy:hover { background: rgba(139,92,246,0.25); }
+    .btn-new { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); }
+    .btn-new:hover { background: var(--surface-hover); color: var(--text); }
+
+    /* Spinner */
+    .spinner {
+      width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin .7s linear infinite; display: none;
+    }
+    .btn-generate.loading .spinner { display: block; }
+    .btn-generate.loading .btn-text { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Ad placeholder ── */
+    .ad-slot {
+      background: var(--surface); border: 1px dashed var(--border);
+      border-radius: var(--radius); padding: 20px; text-align: center;
+      color: var(--text-muted); font-size: 0.8rem; margin: 0 24px 40px;
+      max-width: 1100px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 24px;
+      text-align: center; color: var(--text-muted); font-size: 0.82rem;
+    }
+    footer strong { color: var(--primary-light); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 50px 16px 40px; }
+      .hero-stats { gap: 20px; }
+      .modal-body, .modal-header { padding: 18px 18px; }
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="wrapper">
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <div class="logo-icon">✨</div>
+        Tools<span>IA</span>
+      </div>
+      <span class="badge-free">100% GRATIS</span>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-chip">✨ Powered by Google Gemini AI</div>
+      <h1>Herramientas de <span class="gradient-text">Inteligencia Artificial</span> Gratis en Español</h1>
+      <p>Genera contenido profesional en segundos con el poder de la IA. Sin registro, sin límites, completamente gratis.</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Herramientas IA</div></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">En Español</div></div>
+        <div class="stat"><div class="stat-num">$0</div><div class="stat-label">Costo total</div></div>
+      </div>
+    </section>
+
+    <!-- API Key Banner -->
+    <div class="api-banner" id="apiBanner" style="max-width:700px;margin:0 auto 40px;padding:20px 24px;">
+      <div class="api-icon">🔑</div>
+      <div class="api-info" style="flex:1;">
+        <strong id="apiStatusText">Configura tu API Key gratuita para empezar</strong>
+        <small id="apiStatusSub">Ve a <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--accent);">aistudio.google.com</a> → crea una clave → pégala aquí</small>
+      </div>
+      <div style="width:100%;" id="apiInputArea">
+        <div class="api-input-row">
+          <input class="api-input" type="password" id="apiKeyInput" placeholder="AIza... (pega tu API Key aquí)" autocomplete="off" />
+          <button class="btn-save-key" onclick="saveApiKey()">Guardar ✓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ad slot top -->
+    <div class="ad-slot" style="margin-bottom:24px;">
+      <!-- Google AdSense Ad Unit — aquí irá tu anuncio automático -->
+      <p>📢 Espacio publicitario</p>
+    </div>
+
+    <!-- Tools Grid -->
+    <section class="tools-section">
+      <p class="section-label">⚡ Elige una herramienta</p>
+      <div class="tools-grid">
+
+        <!-- 1. Captions Instagram -->
+        <div class="tool-card" style="--card-color:#8b5cf6;" onclick="openTool('instagram')">
+          <div class="tool-card-inner">
+            <div class="tool-emoji" style="background:rgba(139,92,246,0.2);">📸</div>
+            <span class="tag" style="background:rgba(139,92,246,0.15);color:#a78bfa;border:1px solid rgba(139,92,246,0.3);">Instagram · TikTok</span>
+            <h3>Generador de Captions</h3>
+            <p>Crea captions virales para tus fotos y videos en Instagram, TikTok y Facebook con hashtags incluidos.</p>
+            <span class="tool-btn">Usar herramienta →</span>
+          </div>
+        </div>
+
+        <!-- 2. Email profesional -->
+        <div class="tool-card" style="--card-color:#06b6d4;" onclick="openTool('email')">
+          <div class="tool-card-inner">
+            <div class="tool-emoji" style="background:rgba(6,182,212,0.2);">📧</div>
+            <span class="tag" style="background:rgba(6,182,212,0.15);color:#22d3ee;border:1px solid rgba(6,182,212,0.3);">Negocios · Profesional</span>
+            <h3>Redactor de Emails</h3>
+            <p>Escribe emails profesionales en segundos. Ventas, seguimientos, presentaciones y más.</p>
+            <span class="tool-btn">Usar herramienta →</span>
+          </div>
+        </div>
+
+        <!-- 3. Nombre de negocio -->
+        <div class="tool-card" style="--card-color:#f59e0b;" onclick="openTool('negocio')">
+          <div class="tool-card-inner">
+            <div class="tool-emoji" style="background:rgba(245,158,11,0.2);">🏢</div>
+            <span class="tag" style="background:rgba(245,158,11,0.15);color:#fbbf24;border:1px solid rgba(245,158,11,0.3);">Emprendimiento</span>
+            <h3>Generador de Nombres</h3>
+            <p>Encuentra el nombre perfecto para tu negocio, marca o proyecto. Con slogan incluido.</p>
+            <span class="tool-btn">Usar herramienta →</span>
+          </div>
+        </div>
+
+        <!-- 4. Ideas TikTok -->
+        <div class="tool-card" style="--card-color:#ec4899;" onclick="openTool('tiktok')">
+          <div class="tool-card-inner">
+            <div class="tool-emoji" style="background:rgba(236,72,153,0.2);">🎬</div>
+            <span class="tag" style="background:rgba(236,72,153,0.15);color:#f472b6;border:1px solid rgba(236,72,153,0.3);">Contenido · Viral</span>
+            <h3>Ideas para TikTok</h3>
+            <p>Genera ideas de videos virales para TikTok y Reels según tu nicho y audiencia.</p>
+            <span class="tool-btn">Usar herramienta →</span>
+          </div>
+        </div>
+
+        <!-- 5. Resumidor -->
+        <div class="tool-card" style="--card-color:#10b981;" onclick="openTool('resumen')">
+          <div class="tool-card-inner">
+            <div class="tool-emoji" style="background:rgba(16,185,129,0.2);">📄</div>
+            <span class="tag" style="background:rgba(16,185,129,0.15);color:#34d399;border:1px solid rgba(16,185,129,0.3);">Productividad</span>
+            <h3>Resumidor de Textos</h3>
+            <p>Resume artículos, documentos o cualquier texto largo en puntos clave en segundos.</p>
+            <span class="tool-btn">Usar herramienta →</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Ad slot bottom -->
+    <div class="ad-slot">
+      <!-- Google AdSense Ad Unit -->
+      <p>📢 Espacio publicitario</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Hecho con ❤️ · <strong>ToolsIA</strong> — Herramientas de Inteligencia Artificial Gratis en Español</p>
+      <p style="margin-top:6px;">Powered by Google Gemini AI · 100% Gratis · Sin registro</p>
+    </footer>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       MODAL
+  ════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span id="modalEmoji" style="font-size:1.4rem;"></span>
+          <h2 id="modalTitle"></h2>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       JAVASCRIPT
+  ════════════════════════════════════════ -->
+  <script>
+    // ── API Key management ──
+    let GEMINI_API_KEY = localStorage.getItem('toolsia_key') || '';
+
+    function updateKeyUI() {
+      const banner = document.getElementById('apiBanner');
+      const statusText = document.getElementById('apiStatusText');
+      const statusSub = document.getElementById('apiStatusSub');
+      const inputArea = document.getElementById('apiInputArea');
+      if (GEMINI_API_KEY) {
+        banner.classList.add('configured');
+        statusText.textContent = '✅ API Key configurada — ¡listo para usar!';
+        statusText.style.color = 'var(--success)';
+        statusSub.textContent = 'Tu clave está guardada en este navegador de forma segura.';
+        inputArea.innerHTML = `<button class="btn-save-key" style="background:rgba(255,255,255,0.1);border:1px solid var(--border);color:var(--text-muted);" onclick="resetKey()">Cambiar clave</button>`;
+      }
+    }
+
+    function saveApiKey() {
+      const val = document.getElementById('apiKeyInput').value.trim();
+      if (!val) { alert('Por favor pega tu API Key'); return; }
+      GEMINI_API_KEY = val;
+      localStorage.setItem('toolsia_key', val);
+      updateKeyUI();
+    }
+
+    function resetKey() {
+      GEMINI_API_KEY = '';
+      localStorage.removeItem('toolsia_key');
+      location.reload();
+    }
+
+    updateKeyUI();
+
+    // ── Tool configurations ──
+    const TOOLS = {
+      instagram: {
+        emoji: '📸',
+        title: 'Generador de Captions para Instagram',
+        render: () => `
+          <div class="form-group">
+            <label>¿Sobre qué es tu foto o video?</label>
+            <textarea id="f_topic" rows="3" placeholder="Ej: Mi café de la mañana en una cafetería vintage de la ciudad"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tono</label>
+            <div class="options-row">
+              <span class="opt-chip active" data-group="tono" data-val="motivacional">✨ Motivacional</span>
+              <span class="opt-chip" data-group="tono" data-val="gracioso">😂 Gracioso</span>
+              <span class="opt-chip" data-group="tono" data-val="informativo">📚 Informativo</span>
+              <span class="opt-chip" data-group="tono" data-val="lifestyle">🌿 Lifestyle</span>
+              <span class="opt-chip" data-group="tono" data-val="romantico">💕 Romántico</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Idioma del caption</label>
+            <div class="options-row">
+              <span class="opt-chip active" data-group="idioma" data-val="español">🇲🇽 Español</span>
+              <span class="opt-chip" data-group="idioma" data-val="inglés">🇺🇸 Inglés</span>
+              <span class="opt-chip" data-group="idioma" data-val="spanglish">🔀 Spanglish</span>
+            </div>
+          </div>
+        `,
+        buildPrompt: (vals) => `Crea 3 captions virales para Instagram sobre: "${vals.f_topic}". 
+Tono: ${vals.tono || 'motivacional'}. Idioma: ${vals.idioma || 'español'}.
+Cada caption debe incluir: texto atractivo (2-4 líneas), emojis relevantes, y 10-15 hashtags populares en español.
+Separa cada caption con una línea de "---".
+Sé creativo, viral y auténtico. No uses frases genéricas.`
+      },
+
+      email: {
+        emoji: '📧',
+        title: 'Redactor de Emails Profesionales',
+        render: () => `
+          <div class="form-group">
+            <label>¿Para qué es el email?</label>
+            <select id="f_tipo">
+              <option value="venta">Propuesta de venta / oferta</option>
+              <option value="seguimiento">Seguimiento a un cliente</option>
+              <option value="presentacion">Presentación de servicios</option>
+              <option value="disculpa">Disculpa / error cometido</option>
+              <option value="colaboracion">Propuesta de colaboración</option>
+              <option value="cobro">Recordatorio de pago</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>¿A quién va dirigido? (contexto)</label>
+            <textarea id="f_destinatario" rows="2" placeholder="Ej: Un cliente potencial que visitó mi tienda la semana pasada y mostró interés en mis servicios de diseño"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tu nombre / empresa</label>
+            <input type="text" id="f_nombre" placeholder="Ej: Carlos García / Diseños García" />
+          </div>
+          <div class="form-group">
+            <label>Tono del email</label>
+            <div class="options-row">
+              <span class="opt-chip active" data-group="tono_email" data-val="profesional y cálido">🤝 Profesional</span>
+              <span class="opt-chip" data-group="tono_email" data-val="formal y serio">👔 Formal</span>
+              <span class="opt-chip" data-group="tono_email" data-val="amigable y casual">😊 Casual</span>
+            </div>
+          </div>
+        `,
+        buildPrompt: (vals) => `Escribe un email profesional en español.
+Tipo: ${vals.f_tipo}
+Contexto del destinatario: ${vals.f_destinatario}
+Remitente: ${vals.f_nombre}
+Tono: ${vals.tono_email || 'profesional y cálido'}
+
+El email debe incluir:
+- Asunto atractivo (escríbelo como "Asunto: ...")
+- Saludo personalizado
+- Cuerpo del email (3-4 párrafos concisos)
+- Llamada a la acción clara
+- Despedida profesional
+Hazlo convincente, humano y efectivo.`
+      },
+
+      negocio: {
+        emoji: '🏢',
+        title: 'Generador de Nombres de Negocio',
+        render: () => `
+          <div class="form-group">
+            <label>¿A qué se dedica tu negocio?</label>
+            <textarea id="f_negocio" rows="2" placeholder="Ej: Venta de ropa deportiva para mujeres, enfocada en actividades al aire libre"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Estilo del nombre</label>
+            <div class="options-row">
+              <span class="opt-chip active" data-group="estilo" data-val="moderno y minimalista">⚡ Moderno</span>
+              <span class="opt-chip" data-group="estilo" data-val="tradicional y confiable">🏛️ Tradicional</span>
+              <span class="opt-chip" data-group="estilo" data-val="creativo y divertido">🎨 Creativo</span>
+              <span class="opt-chip" data-group="estilo" data-val="lujoso y premium">💎 Premium</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>¿En qué idioma prefieres el nombre?</label>
+            <div class="options-row">
+              <span class="opt-chip active" data-group="lang_neg" data-val="español">🇲🇽 Español</span>
+              <span class="opt-chip" data-group="lang_neg" data-val="inglés">🇺🇸 Inglés</span>
+              <span class="opt-chip" data-group="lang_neg" data-val="combinación">🔀 Mixto</span>
+            </div>
+          </div>
+        `,
+        buildPrompt: (vals) => `Genera 8 nombres originales para un negocio en español.
+Giro del negocio: ${vals.f_negocio}
+Estilo: ${vals.estilo || 'moderno y minimalista'}
+Idioma preferido: ${vals.lang_neg || 'español'}
+
+Para cada nombre incluye:
+- El nombre del negocio (en negrita con **)
+- Un slogan corto y poderoso
+- Por qué funciona (1 línea)
+
+Asegúrate de que los nombres sean únicos, memorables, fáciles de pronunciar y que transmitan la esencia del negocio.`
+      },
+
+      tiktok: {
+        emoji: '🎬',
+        title: 'Generador de Ideas para TikTok',
+        render: () => `
+          <div class="form-group">
+            <label>¿Cuál es tu nicho o tema?</label>
+            <textarea id="f_nicho" rows="2" placeholder="Ej: Emprendimiento y finanzas personales para jóvenes de 20-30 años"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tipo de video</label>
+            <div class="options-row">
+              <span class="opt-chip active" data-group="tipo_vid" data-val="educativo y de valor">📚 Educativo</span>
+              <span class="opt-chip" data-group="tipo_vid" data-val="entretenido y viral">😂 Entretenido</span>
+              <span class="opt-chip" data-group="tipo_vid" data-val="inspiracional">✨ Inspiracional</span>
+              <span class="opt-chip" data-group="tipo_vid" data-val="day in my life / vlog">🎥 Vlog</span>
+              <span class="opt-chip" data-group="tipo_vid" data-val="tips y hacks">💡 Tips</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>¿Cuántas ideas quieres?</label>
+            <div class="options-row">
+              <span class="opt-chip" data-group="cantidad" data-val="5">5 ideas</span>
+              <span class="opt-chip active" data-group="cantidad" data-val="10">10 ideas</span>
+              <span class="opt-chip" data-group="cantidad" data-val="15">15 ideas</span>
+            </div>
+          </div>
+        `,
+        buildPrompt: (vals) => `Genera ${vals.cantidad || 10} ideas de videos de TikTok/Reels para el siguiente nicho:
+Nicho: ${vals.f_nicho}
+Tipo de video: ${vals.tipo_vid || 'educativo y de valor'}
+
+Para cada idea incluye:
+- 🎬 **Título del video** (el hook de los primeros 3 segundos)
+- 📝 Descripción breve de qué trataría (2-3 líneas)
+- 🎵 Sugerencia de tipo de música o sonido
+- 📊 Por qué tiene potencial viral
+
+Enfócate en ideas que generen alto engagement y que sean fáciles de grabar.`
+      },
+
+      resumen: {
+        emoji: '📄',
+        title: 'Resumidor Inteligente de Textos',
+        render: () => `
+          <div class="form-group">
+            <label>Pega aquí el texto que quieres resumir</label>
+            <textarea id="f_texto" rows="7" placeholder="Pega cualquier artículo, documento, noticia, capítulo de libro, correo largo... lo que sea."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tipo de resumen</label>
+            <div class="options-row">
+              <span class="opt-chip active" data-group="tipo_res" data-val="puntos clave con bullets">📋 Puntos clave</span>
+              <span class="opt-chip" data-group="tipo_res" data-val="resumen ejecutivo en párrafos">📄 Ejecutivo</span>
+              <span class="opt-chip" data-group="tipo_res" data-val="muy corto (1 párrafo)">⚡ Ultra corto</span>
+              <span class="opt-chip" data-group="tipo_res" data-val="preguntas y respuestas">❓ Q&A</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Extensión del resumen</label>
+            <div class="options-row">
+              <span class="opt-chip" data-group="ext" data-val="muy corto">Muy corto</span>
+              <span class="opt-chip active" data-group="ext" data-val="mediano">Mediano</span>
+              <span class="opt-chip" data-group="ext" data-val="detallado">Detallado</span>
+            </div>
+          </div>
+        `,
+        buildPrompt: (vals) => `Resume el siguiente texto en español.
+Tipo de resumen: ${vals.tipo_res || 'puntos clave con bullets'}
+Extensión: ${vals.ext || 'mediano'}
+
+TEXTO A RESUMIR:
+"""
+${vals.f_texto}
+"""
+
+Instrucciones:
+- Mantén las ideas más importantes
+- Usa lenguaje claro y directo
+- Si es puntos clave, usa emojis al inicio de cada punto
+- Al final agrega: "💡 Conclusión principal:" con la idea más relevante`
+      }
+    };
+
+    // ── Modal logic ──
+    let currentTool = null;
+    let chipValues = {};
+
+    function openTool(toolId) {
+      if (!GEMINI_API_KEY) {
+        alert('⚠️ Primero configura tu API Key gratuita de Google Gemini.\n\nVe a: aistudio.google.com → crea una API Key → pégala arriba.');
+        document.getElementById('apiKeyInput') && document.getElementById('apiKeyInput').focus();
+        return;
+      }
+      currentTool = toolId;
+      chipValues = {};
+      const tool = TOOLS[toolId];
+      document.getElementById('modalEmoji').textContent = tool.emoji;
+      document.getElementById('modalTitle').textContent = tool.title;
+      document.getElementById('modalBody').innerHTML = `
+        ${tool.render()}
+        <button class="btn-generate" id="generateBtn" onclick="generate()">
+          <span class="btn-text">✨ Generar con IA</span>
+          <div class="spinner"></div>
+        </button>
+        <div class="result-box" id="resultBox">
+          <div class="result-label">✨ Resultado generado por IA</div>
+          <div class="result-content" id="resultContent"></div>
+          <div class="result-actions">
+            <button class="btn-copy" onclick="copyResult()">📋 Copiar texto</button>
+            <button class="btn-new" onclick="generate()">🔄 Regenerar</button>
+          </div>
+        </div>
+      `;
+      // Init chip values from active state
+      document.querySelectorAll('.opt-chip.active').forEach(c => {
+        chipValues[c.dataset.group] = c.dataset.val;
+      });
+      // Chip click
+      document.querySelectorAll('.opt-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const group = chip.dataset.group;
+          document.querySelectorAll(`.opt-chip[data-group="${group}"]`).forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          chipValues[group] = chip.dataset.val;
+        });
+      });
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+
+    // ── Generate ──
+    async function generate() {
+      if (!currentTool) return;
+      const tool = TOOLS[currentTool];
+
+      // Gather field values
+      const vals = { ...chipValues };
+      document.querySelectorAll('#modalBody input[id^="f_"], #modalBody textarea[id^="f_"], #modalBody select[id^="f_"]').forEach(el => {
+        vals[el.id] = el.value.trim();
+      });
+
+      // Validate required text fields
+      const requiredTextFields = ['f_topic','f_destinatario','f_nombre','f_negocio','f_nicho','f_texto'].filter(f => vals[f] !== undefined);
+      for (const f of requiredTextFields) {
+        if (!vals[f]) {
+          alert('Por favor completa todos los campos antes de generar.');
+          return;
+        }
+      }
+
+      const prompt = tool.buildPrompt(vals);
+      const btn = document.getElementById('generateBtn');
+      const resultBox = document.getElementById('resultBox');
+      const resultContent = document.getElementById('resultContent');
+
+      btn.disabled = true;
+      btn.classList.add('loading');
+      resultBox.classList.remove('visible');
+
+      try {
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }],
+              generationConfig: { temperature: 0.9, maxOutputTokens: 1500 }
+            })
+          }
+        );
+
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.error?.message || 'Error en la API');
+        }
+
+        const data = await response.json();
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No se pudo generar el contenido.';
+        resultContent.textContent = text;
+        resultBox.classList.add('visible');
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      } catch (err) {
+        console.error(err);
+        resultContent.textContent = '❌ Error: ' + err.message + '\n\nVerifica que tu API Key sea correcta y tenga acceso a Gemini.';
+        resultBox.classList.add('visible');
+      }
+
+      btn.disabled = false;
+      btn.classList.remove('loading');
+    }
+
+    // ── Copy ──
+    function copyResult() {
+      const text = document.getElementById('resultContent').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.btn-copy');
+        btn.textContent = '✅ ¡Copiado!';
+        setTimeout(() => btn.textContent = '📋 Copiar texto', 2000);
+      });
+    }
+
+    // ── Keyboard ──
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
